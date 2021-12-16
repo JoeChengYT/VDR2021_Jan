@@ -1,4 +1,4 @@
-# Virtual Donkey Racing2022_January
+# Virtual DonkeyCar Race 2022 January
 
 # Repository Introduction
 This repository includes Donkey v4.2 driving data, trained models, and Donkey configuration data for participation in the Virtual DonkeyCar Race racing in January 2022.  
