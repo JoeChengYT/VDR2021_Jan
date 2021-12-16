@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  agent1:
+    container_name: hirohaku_ahoy
+    build:
+      context: .
+      dockerfile: agent.Dockerfile
+    stdin_open: true
+    tty: true        # docker run -t
+    ports:
+      - "8887:8887"
+    image: yourname/race2021_nov:0.1
