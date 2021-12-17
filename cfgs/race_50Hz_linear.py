@@ -31,7 +31,7 @@ DONKEY_GYM = True
 DONKEY_SIM_PATH = "remote"
 SIM_HOST = "donkey-sim.roboticist.dev"
 
-DONKEY_GYM_ENV_NAME = "donkey-circuit-launch-track-v0" 
+DONKEY_GYM_ENV_NAME = "donkey-mountain-track-v0" 
 GYM_CONF = { "body_style" : "donkey", "body_rgb" : (230, 0, 50), "car_name" : "Ahoy!", "font_size" : 18} # body style(donkey|bare|car01) body rgb 0-255
 
 GYM_CONF["racer_name"] = "hirohaku"

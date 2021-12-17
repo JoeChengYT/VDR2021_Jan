@@ -31,8 +31,8 @@ arrange:
 	find data -type d -empty | sed 's/\/images/ /g' | xargs rm -rf 
 
 install_sim:
-	@echo "Install DonkeySim v21.04.15" && \
-	wget -qO- https://github.com/tawnkramer/gym-donkeycar/releases/download/v21.07.24/DonkeySimLinux.zip | bsdtar -xvf - -C . && \
+	@echo "Install DonkeySim v21.12.11" && \
+		wget -qO- https://github.com/tawnkramer/gym-donkeycar/releases/download/v21.12.11/DonkeySimLinux.zip | bsdtar -xvf - -C . && \
 	chmod +x DonkeySimLinux/donkey_sim.x86_64
 
 record: record10

@@ -31,8 +31,7 @@ DONKEY_GYM = True
 DONKEY_SIM_PATH = "remote"
 SIM_HOST = "donkey-sim.roboticist.dev"
 
-DONKEY_GYM_ENV_NAME = "donkey-circuit-launch-track-v0" 
-
+DONKEY_GYM_ENV_NAME = "donkey-mountain-track-v0"
 GYM_CONF["racer_name"] = "hirohaku"
 GYM_CONF["country"] = "JP"
 GYM_CONF["bio"] = "HELLO"

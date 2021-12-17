@@ -31,7 +31,7 @@ DONKEY_GYM = True
 DONKEY_SIM_PATH = "./DonkeySimLinux/donkey_sim.x86_64"
 SIM_HOST = "localhost"
 
-DONKEY_GYM_ENV_NAME = "donkey-circuit-launch-track-v0" 
+DONKEY_GYM_ENV_NAME = "donkey-mountain-track-v0"
 
 GYM_CONF["racer_name"] = "hirohkau_Ahoy!"
 GYM_CONF["country"] = "JP"

@@ -61,7 +61,7 @@ See the Makefile.
 - ```.gitignore```: This allows you to specify files and directories not to be pushed to the repository.　　
 
 # リポジトリ紹介
-このリポジトリは2021年11月のVirtual DonkeyCar Race racingに参加するためにDonkey v4.2 の走行データ、学習済みモデル、Donkeyのコンフィグデータを共有します。
+このリポジトリは2022年1月のVirtual DonkeyCar Race racingに参加するためにDonkey v4.2 の走行データ、学習済みモデル、Donkeyのコンフィグデータを共有します。
 このリポジトリは[hogenimushi/vdc2020_race03](https://github.com/hogenimushi/vdc2020_race03) を参考にして作っています。
 
 ## 準備
@@ -122,7 +122,7 @@ Makefileをご覧ください。
 - ```.gitignore```: リポジトリにpushしないファイルやディレクトリを指定できます。
 
 # 存储库介绍
-该存储库共享Donkey v4.2驾驶数据、训练模型和Donkey配置数据，以参加2021年11月的Virtual DonkeyCar Race比赛。  
+该存储库共享Donkey v4.2驾驶数据、训练模型和Donkey配置数据，以参加2022年1月的Virtual DonkeyCar Race比赛。  
 这个存储库是通过参考[hogenimushi/vdc2020_race03](https://github.com/hogenimushi/vdc2020_race03)创建的。  
 
 ## 准备
