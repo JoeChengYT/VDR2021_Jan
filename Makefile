@@ -38,7 +38,7 @@ install_sim:
 record: record10
 
 record10:
-	$(PYTHON) manage.py drive --js --myconfig=cfgs/myconfig_10Hz.py
+	$(PYTHON) manage.py drive --js --myconfig=cfgs/hirohaku_cfg.py
 
 # Tutorial
 dataset: $(TRM_ALL)
@@ -46,13 +46,16 @@ dataset: $(TRM_ALL)
 mask: $(MSK_ALL)
 
 test_run:
-	$(PYTHON) manage.py drive --model=models/test.h5 --type=linear --myconfig=cfgs/myconfig_10Hz.py
+	$(PYTHON) manage.py drive --model=models/test.h5 --type=rnn --myconfig=cfgs/hirohaku_cfg.py
+
+test_run_lite:
+	$(PYTHON) manage.py drive --model=models/test.tflite --type=rnn --myconfig=cfgs/hirohaku_cfg.py
 
 test_train: models/test.h5
 	make models/test.h5
 
 models/test.h5: $(DATASET)
-	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/myconfig_10Hz.py
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku_cfg.py
 
 .PHONY: .trimmed
 data/%.trimmed: save_data/%.trim
