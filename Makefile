@@ -36,7 +36,8 @@ install_sim:
 	chmod +x DonkeySimLinux/donkey_sim.x86_64
 
 record: record10
-
+record_kuro:
+	$(PYTHON) manage.py drive --js --myconfig=cfgs/kuro_myconfig_10Hz.py
 record10:
 	$(PYTHON) manage.py drive --js --myconfig=cfgs/myconfig_10Hz.py
 
