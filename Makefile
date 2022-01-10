@@ -52,7 +52,7 @@ test_train: models/test.h5
 	make models/test.h5
 
 models/test.h5: $(DATASET)
-	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/myconfig_10Hz.py
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/myconfig_10Hz_sugaya.py
 
 .PHONY: .trimmed
 data/%.trimmed: save_data/%.trim
