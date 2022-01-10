@@ -38,7 +38,7 @@ install_sim:
 record: record10
 
 record10:
-	$(PYTHON) manage.py drive --js --myconfig=cfgs/myconfig_10Hz.py
+	$(PYTHON) manage.py drive --js --myconfig=cfgs/myconfig_10Hz_sugaya.py
 
 # Tutorial
 dataset: $(TRM_ALL)
