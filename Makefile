@@ -46,7 +46,7 @@ dataset: $(TRM_ALL)
 mask: $(MSK_ALL)
 
 test_run:
-	$(PYTHON) manage.py drive --model=models/test.h5 --type=linear --myconfig=cfgs/myconfig_10Hz.py
+	$(PYTHON) manage.py drive --model=models/test.h5 --type=linear --myconfig=cfgs/myconfig_10Hz_sugaya.py
 
 test_train: models/test.h5
 	make models/test.h5
