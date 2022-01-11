@@ -18,9 +18,13 @@ MSK_ALL = $(MSK_EXAMPLE)
 
 #Call Data
 DATASET = $(shell find data/ -type d | grep -v "images" | sed -e '1d' | tr '\n' ' ')
+SGY_DATA = $(shell find save_data/ -type d | grep -v "images" | sed -e '1d' | tr '\n' ' ')
 
 none:
 	@echo "Argument is required."
+
+copy:
+	mv data/sgy_data* save_data/
 
 clean:
 	rm -rf models/*
@@ -51,7 +55,13 @@ test_run:
 test_train: models/test.h5
 	make models/test.h5
 
+sgy_test_train: models/sgy_model.h5
+	make models/sgy_model.h5
+
 models/test.h5: $(DATASET)
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/myconfig_10Hz_sugaya.py
+
+models/sgy_model.h5: $(SGY_DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/myconfig_10Hz_sugaya.py
 
 .PHONY: .trimmed

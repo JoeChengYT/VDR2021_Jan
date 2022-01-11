@@ -33,7 +33,7 @@ SIM_HOST = "localhost"
 
 DONKEY_GYM_ENV_NAME = "donkey-mountain-track-v0" 
 #GYM_CONF = { "body_style" : "bare", "body_rgb" : (69, 69, 69), "car_name" : "hirohkau_Ahoy!", "font_size" : 18} # body style(donkey|bare|car01) body rgb 0-255
-GYM_CONF = { "body_style" : "donkey", "body_rgb" : (230, 0, 50), "car_name" : "sugasin2813", "font_size" : 20} # body style(donkey|bare|car01) body rgb 0-255
+GYM_CONF = { "body_style" : "donkey", "body_rgb" : (255, 0, 255), "car_name" : "sugasin2813", "font_size" : 30} # body style(donkey|bare|car01) body rgb 0-255
 
 
 GYM_CONF["racer_name"] = "sugasin2813"
