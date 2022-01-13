@@ -81,6 +81,15 @@ models/fast0_rnn4.h5: $(DATA)
 test_run:
 	$(PYTHON) manage.py drive --model=models/test.h5 --type=linear --myconfig=cfgs/hirohaku_cfg.py
 
+linear:
+	$(PYTHON) manage.py drive --model=save_model/fast0_linear.h5 --type=linear --myconfig=cfgs/hirohaku2_cfg.py
+
+rnn2:
+	$(PYTHON) manage.py drive --model=save_model/fast0_rnn2.h5 --type=rnn --myconfig=cfgs/hirohaku2_cfg.py
+
+rnn4:
+	$(PYTHON) manage.py drive --model=save_model/fast0_rnn4.h5 --type=rnn --myconfig=cfgs/hirohaku4_cfg.py
+
 ###############################################################################
 # Input files to Docker Team_ahoy_racer directory####################################################################
 docker:
