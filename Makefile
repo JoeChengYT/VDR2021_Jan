@@ -93,13 +93,15 @@ rnn4:
 ###############################################################################
 # Input files to Docker Team_ahoy_racer directory####################################################################
 docker:
+	@echo Create contents which include in docker image
+	mkdir -p Docker/Team_ahoy_racer && \
 	cp -r cfgs/ Docker/Team_ahoy_racer/ && \
 	cp -r save_model/ Docker/Team_ahoy_racer/save_model/ && \
 	cp config.py Docker/Team_ahoy_racer/config.py && \
 	cp manage.py Docker/Team_ahoy_racer/manage.py && \
 	cp Makefile Docker/Team_ahoy_racer/Makefile && \
-	mkdir Docker/Team_ahoy_racer/models && \
-	mkdir Docker/Team_ahoy_racer/data
+	mkdir -p Docker/Team_ahoy_racer/models && \
+	mkdir -p Docker/Team_ahoy_racer/data
 
 ######################################################################################################################
 
