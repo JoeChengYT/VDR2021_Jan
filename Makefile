@@ -15,7 +15,9 @@ TRIM_MASK_ALL = $(TRIM_MASK)
 #Trim
 TRM_EXAMPLE = data/Example_data.trim_done
 FAST0 = data/fast0_0.trim_done data/fast0_1.trim_done data/fast0_2.trim_done data/fast0_3.trim_done data/fast0_4.trim_done
+LAP1ST = data/first_lap0.trim_done
 TRM_FAST0 = $(FAST0)
+TRM_LAP1ST = $(LAP1ST)
 TRM_ALL = $(TRM_EXAMPLE)
 
 #Mask
@@ -45,13 +47,14 @@ install_sim:
 	wget -qO- https://github.com/tawnkramer/gym-donkeycar/releases/download/v21.12.11/DonkeySimLinux.zip | bsdtar -xvf - -C . && \
 	chmod +x DonkeySimLinux/donkey_sim.x86_64
 
-record: record10
+record: record40
 
-record10:
+record40:
 	$(PYTHON) manage.py drive --js --myconfig=cfgs/hirohaku2_cfg.py
 
 trim: $(TRM_ALL)
 trm_fast0: $(TRM_FAST0)
+trim_lap1st: $(TRM_LAP1ST)
 
 mask: $(MSK_ALL)
 trim_mask: $(TRIM_MASK_ALL)
