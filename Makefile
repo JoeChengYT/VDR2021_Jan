@@ -82,6 +82,8 @@ models/fast0_rnn4.h5: $(DATA)
 models/alter_fast0_linear.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
+models/alter_fast0_rnn2.h5:$(DATA)
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
 
 # Autonomous Driving using .h5 File
 test_run:
