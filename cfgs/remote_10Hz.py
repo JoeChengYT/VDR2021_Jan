@@ -1,4 +1,5 @@
 # """ 
+
 # My CAR CONFIG 
 
 # This file is read by your car application's manage.py script to change the car
@@ -20,7 +21,7 @@ IMAGE_DEPTH = 3         # default RGB=3, make 1 for mono
 DRIVE_LOOP_HZ = 10
 
 #JOYSTICK
-USE_JOYSTICK_AS_DEFAULT = True
+USE_JOYSTICK_AS_DEFAULT = False
 CONTROLLER_TYPE ='F710'
 JOYSTICK_MAX_THROTTLE = 1.0
 JOYSTICK_STEERING_SCALE = 1.0
@@ -29,11 +30,11 @@ MODEL_CATEGORICAL_MAX_THROTTLE_RANGE = JOYSTICK_MAX_THROTTLE
 #DonkeyGym
 DONKEY_GYM = True
 DONKEY_SIM_PATH = "remote"
-SIM_HOST = "163.143.94.185"
+SIM_HOST = "192.168.2.117"
 
 DONKEY_GYM_ENV_NAME = "donkey-mountain-track-v0"
-GYM_CONF = { "body_style" : "donkey", "body_rgb" : (230, 0, 50), "car_name" : "Ahoy!", "font_size" : 18} # body style(donkey|bare|car01) body rgb 0-255
-GYM_CONF["racer_name"] = "hirohkau"
+GYM_CONF = { "body_style" : "car01", "body_rgb" : (117, 0, 176), "car_name" : "kuro", "font_size" : 18} # body style(donkey|bare|car01) body rgb 0-255
+GYM_CONF["racer_name"] = "kuro"
 GYM_CONF["country"] = "JP"
 GYM_CONF["bio"] = "HELLO"
 SIM_ARTIFICIAL_LATENCY = 0

@@ -46,19 +46,20 @@ record10:
 dataset: $(TRM_ALL)
 
 mask: $(MSK_ALL)
-mask_data1: $(MSK_DATA1)
 
 test_run:
 	$(PYTHON) manage.py drive --model=models/test.h5 --type=linear --myconfig=cfgs/myconfig_10Hz.py
-test_kuro_run:
-	$(PYTHON) manage.py drive --model=models/test_kuro.h5 --type=linear --myconfig=cfgs/kuro_myconfig_10Hz.py
+linear_fast1_run:
+	$(PYTHON) manage.py drive --model=save_model/linear_fast1.h5 --type=linear --myconfig=cfgs/kuro_myconfig_10Hz.py
+remote_run:
+	$(PYTHON) manage.py drive --model=save_model/linear_fast1.h5 --type=linear --myconfig=cfgs/remote_10Hz.py
 test_train: models/test.h5
 	make models/test.h5
-test_kuro_train: models/test_kuro.h5
+linear_fast1_train: models/linear_fast1.h5
 
 models/test.h5: $(DATASET)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/myconfig_10Hz.py
-models/test_kuro.h5: $(DATASET)
+models/linear_fast1.h5: $(DATASET)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/kuro_myconfig_10Hz.py
 
 
