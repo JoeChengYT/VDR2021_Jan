@@ -14,6 +14,7 @@ TRM_ALL = $(TRM_EXAMPLE)
 #Mask
 MSK_EXAMPLE = data/Example_data.trimmed.masked1
 MSK_ALL = $(MSK_EXAMPLE)
+MSK_DATA1 = data/data1.masked1
 
 
 #Call Data
@@ -45,15 +46,21 @@ record10:
 dataset: $(TRM_ALL)
 
 mask: $(MSK_ALL)
+mask_data1: $(MSK_DATA1)
 
 test_run:
 	$(PYTHON) manage.py drive --model=models/test.h5 --type=linear --myconfig=cfgs/myconfig_10Hz.py
-
+test_kuro_run:
+	$(PYTHON) manage.py drive --model=models/test_kuro.h5 --type=linear --myconfig=cfgs/kuro_myconfig_10Hz.py
 test_train: models/test.h5
 	make models/test.h5
+test_kuro_train: models/test_kuro.h5
 
 models/test.h5: $(DATASET)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/myconfig_10Hz.py
+models/test_kuro.h5: $(DATASET)
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/kuro_myconfig_10Hz.py
+
 
 .PHONY: .trimmed
 data/%.trimmed: save_data/%.trim
