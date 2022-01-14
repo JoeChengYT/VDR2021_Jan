@@ -52,7 +52,7 @@ record: record40
 record40:
 	$(PYTHON) manage.py drive --js --myconfig=cfgs/hirohaku2_cfg.py
 
-trim: $(TRM_ALL)
+trim: $(TRM_FAST0)$(TRM_LAP1ST)
 trm_fast0: $(TRM_FAST0)
 trim_lap1st: $(TRM_LAP1ST)
 
@@ -78,6 +78,9 @@ models/fast0_rnn2.h5: $(DATA)
 
 models/fast0_rnn4.h5: $(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku4_cfg.py
+
+models/alter_fast0_linear.h5:$(DATA)
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
 
 # Autonomous Driving using .h5 File
