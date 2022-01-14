@@ -96,6 +96,14 @@ models/alter_normal_rnn2.h5:$(DATA)
 models/alter_mser_linear.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
+models/alter_mser_rnn2.h5:$(DATA)
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
+
+models/alter_normal_mser_linear.h5:$(DATA)
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
+
+models/alter_normal_mser_rnn2.h5:$(DATA)
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
 
 # Autonomous Driving using .h5 File
 test_run:
