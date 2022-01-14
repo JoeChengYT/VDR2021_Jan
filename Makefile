@@ -16,8 +16,13 @@ TRIM_MASK_ALL = $(TRIM_MASK)
 TRM_EXAMPLE = data/Example_data.trim_done
 FAST0 = data/fast0_0.trim_done data/fast0_1.trim_done data/fast0_2.trim_done data/fast0_3.trim_done data/fast0_4.trim_done
 LAP1ST = data/first_lap0.trim_done
+MSER_FAST_LAP = data/mserfast0_0.trim_done data/mserfast0_1.trim_done data/mserfast0_2.trim_done data/mserfast0_3.trim_done data/mserfast0_4.trim_done data/mserfirst_lap0.trim_done
+
 TRM_FAST0 = $(FAST0)
 TRM_LAP1ST = $(LAP1ST)
+ALTER_NORMAL = $(FAST0) $(LAP1ST)
+ALTER_MSER = $(MSER_FAST_LAP)
+
 TRM_ALL = $(TRM_EXAMPLE)
 
 #Mask
@@ -56,6 +61,9 @@ trim: $(TRM_FAST0) $(TRM_LAP1ST)
 trm_fast0: $(TRM_FAST0)
 trim_lap1st: $(TRM_LAP1ST)
 
+trim_Anormal: $(ALTER_NORMAL)
+trim_Amser:$(ALTER_MSER)
+
 mask: $(MSK_ALL)
 trim_mask: $(TRIM_MASK_ALL)
 
@@ -79,11 +87,15 @@ models/fast0_rnn2.h5: $(DATA)
 models/fast0_rnn4.h5: $(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku4_cfg.py
 
-models/alter_fast0_linear.h5:$(DATA)
+models/alter_normal_linear.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
-models/alter_fast0_rnn2.h5:$(DATA)
+models/alter_normal_rnn2.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
+
+models/alter_mser_linear.h5:$(DATA)
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
+
 
 # Autonomous Driving using .h5 File
 test_run:
