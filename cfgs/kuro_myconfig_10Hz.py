@@ -40,6 +40,14 @@ GYM_CONF["racer_name"] = "kuro"
 GYM_CONF["country"] = "JP"
 GYM_CONF["bio"] = "HELLO"
 
+GYM_CONF['cam_config'] = {
+    "img_enc" : "PNG",
+    "offset_x" : "0.0",
+    "offset_y" : "2.5", # 4.0 #pln 3.0
+    "offset_z" : "0.0", # 5.0 #pln 3.0
+    "rot_x" : "45.0"    # 90.0 #pln 50.0
+}
+
 SIM_ARTIFICIAL_LATENCY = 0
 
 #WEB CONTROL
@@ -65,3 +73,8 @@ CACHE_IMAGES = False       #keep images in memory. will speed succesive epochs, 
 #RECORD OPTIONS
 RECORD_DURING_AI = False
 AUTO_CREATE_NEW_TUB = True
+
+"""# FPS counter
+SHOW_FPS = True
+FPS_DEBUG_INTERVAL = 10"""
+
