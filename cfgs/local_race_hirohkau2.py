@@ -28,8 +28,11 @@ MODEL_CATEGORICAL_MAX_THROTTLE_RANGE = JOYSTICK_MAX_THROTTLE
 
 #DonkeyGym
 DONKEY_GYM = True
-DONKEY_SIM_PATH = "./DonkeySimLinux/donkey_sim.x86_64"
-SIM_HOST = "localhost"
+#DONKEY_SIM_PATH = "./DonkeySimLinux/donkey_sim.x86_64"
+#SIM_HOST = "localhost"
+DONKEY_SIM_PATH = "remote"
+SIM_HOST = "192.168.1.19"
+
 
 DONKEY_GYM_ENV_NAME = "donkey-mountain-track-v0"
 GYM_CONF = { "body_style" : "donkey", "body_rgb" : (230, 0, 50), "car_name" : "hirohaku", "font_size" : 18} # body style(donkey|bare|car01) body rgb 0-255
@@ -54,7 +57,7 @@ SIM_ARTIFICIAL_LATENCY = 0
 
 #WEB CONTROL
 WEB_CONTROL_PORT = 8887 
-WEB_INIT_MODE = "local"   # or user
+WEB_INIT_MODE = "user"   # or user
 
 #TRAINING
 DEFAULT_AI_FRAMEWORK = 'tensorflow'
