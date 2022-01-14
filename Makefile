@@ -52,7 +52,7 @@ record: record40
 record40:
 	$(PYTHON) manage.py drive --js --myconfig=cfgs/hirohaku2_cfg.py
 
-trim: $(TRM_FAST0)$(TRM_LAP1ST)
+trim: $(TRM_FAST0) $(TRM_LAP1ST)
 trm_fast0: $(TRM_FAST0)
 trim_lap1st: $(TRM_LAP1ST)
 
