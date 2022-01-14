@@ -67,6 +67,21 @@ models/test.h5: $(DATASET)
 models/sgy_model.h5: $(SGY_DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/myconfig_10Hz_sugaya.py
 
+###############################################################################
+# Input files to Docker Team_ahoy_racer directory####################################################################
+docker:
+	@echo Create contents which include in docker image
+	mkdir -p Docker/Team_ahoy_racer && \
+	cp -r cfgs/ Docker/Team_ahoy_racer/cfgs/ && \
+	cp -r save_model/ Docker/Team_ahoy_racer/save_model/ && \
+	cp config.py Docker/Team_ahoy_racer/config.py && \
+	cp manage.py Docker/Team_ahoy_racer/manage.py && \
+	cp Makefile Docker/Team_ahoy_racer/Makefile && \
+	mkdir -p Docker/Team_ahoy_racer/models && \
+	mkdir -p Docker/Team_ahoy_racer/data
+
+######################################################################################################################
+
 .PHONY: .trimmed
 data/%.trimmed: save_data/%.trim
 	$(PYTHON) scripts/multi_trim.py --input=$(subst .trim,$(EMPTY),$<) --output $@ --file $< --onefile
