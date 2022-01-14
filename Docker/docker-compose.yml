@@ -10,4 +10,5 @@ services:
     tty: true        # docker run -t
     ports:
       - "8887:8887"
-    image: yourname/race2021_nov:0.1
+    image: test:0.1
+        #image: yourname/race2021_nov:0.1

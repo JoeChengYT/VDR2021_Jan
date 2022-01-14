@@ -14,7 +14,7 @@ TRM_ALL = $(TRM_EXAMPLE)
 #Mask
 MSK_EXAMPLE = data/Example_data.trimmed.masked1
 MSK_ALL = $(MSK_EXAMPLE)
-MSK_DATA1 = data/data1.masked1
+MSK_DATA1 = data/data1.masked2
 
 
 #Call Data
