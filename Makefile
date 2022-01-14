@@ -50,7 +50,22 @@ dataset: $(TRM_ALL)
 mask: $(MSK_ALL)
 
 test_run:
+	$(PYTHON) manage.py drive --model=save_model/test.h5 --type=linear --myconfig=cfgs/myconfig_10Hz.py
+
+remote_run_sgy1:
 	$(PYTHON) manage.py drive --model=save_model/sgy_model.h5 --type=linear --myconfig=cfgs/remote_10Hz.py
+
+remote_run_sgy2:
+	$(PYTHON) manage.py drive --model=save_model/sgy_model2.h5 --type=linear --myconfig=cfgs/myconfig_10Hz.py
+
+remote_run_sgy3:
+	$(PYTHON) manage.py drive --model=save_model/sgy_model3.h5 --type=linear --myconfig=cfgs/myconfig_10Hz.py
+
+remote_run_sgy4:
+	$(PYTHON) manage.py drive --model=save_model/sgy_model4.h5 --type=linear --myconfig=cfgs/myconfig_10Hz.py
+
+remote_run_sgy5:
+	$(PYTHON) manage.py drive --model=save_model/sgy_model5.h5 --type=linear --myconfig=cfgs/myconfig_10Hz.py
 
 sgy_model_test_run:
 	$(PYTHON) manage.py drive --model=save_model/sgy_model.h5 --type=linear --myconfig=cfgs/myconfig_10Hz_sugaya.py

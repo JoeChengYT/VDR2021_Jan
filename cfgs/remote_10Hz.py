@@ -29,11 +29,11 @@ MODEL_CATEGORICAL_MAX_THROTTLE_RANGE = JOYSTICK_MAX_THROTTLE
 #DonkeyGym
 DONKEY_GYM = True
 DONKEY_SIM_PATH = "remote"
-SIM_HOST = "163.143.94.185"
+SIM_HOST = "192.168.11.2"
 
 DONKEY_GYM_ENV_NAME = "donkey-mountain-track-v0"
-GYM_CONF = { "body_style" : "donkey", "body_rgb" : (230, 0, 50), "car_name" : "Ahoy!", "font_size" : 18} # body style(donkey|bare|car01) body rgb 0-255
-GYM_CONF["racer_name"] = "hirohkau"
+GYM_CONF = { "body_style" : "bare", "body_rgb" : (255, 255, 0), "car_name" : "sugasin2813", "font_size" : 25} # body style(donkey|bare|car01) body rgb 0-255
+GYM_CONF["racer_name"] = "sugasin2813"
 GYM_CONF["country"] = "JP"
 GYM_CONF["bio"] = "HELLO"
 SIM_ARTIFICIAL_LATENCY = 0
