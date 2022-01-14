@@ -50,7 +50,7 @@ dataset: $(TRM_ALL)
 mask: $(MSK_ALL)
 
 test_run:
-	$(PYTHON) manage.py drive --model=models/test.h5 --type=linear --myconfig=cfgs/myconfig_10Hz_sugaya.py
+	$(PYTHON) manage.py drive --model=save_model/sgy_model.h5 --type=linear --myconfig=cfgs/remote_10Hz.py
 
 sgy_model_test_run:
 	$(PYTHON) manage.py drive --model=save_model/sgy_model.h5 --type=linear --myconfig=cfgs/myconfig_10Hz_sugaya.py

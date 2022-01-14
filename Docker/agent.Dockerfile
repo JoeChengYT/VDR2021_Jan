@@ -36,8 +36,8 @@ RUN git clone https://github.com/autorope/donkeycar && \
 #RUN conda env create -f ubuntu.yml
 
 WORKDIR /root/projects/donkeycar
-RUN pip install -e .[pc] && \
-    pip install tensorflow==2.4.0 tensorflow-gpu==2.4.0
+RUN pip install -e .[pc] && \ 
+    pip install tensorflow==2.4.0 && pip install tensorflow-gpu==2.4.0
 
 #RUN . /opt/conda/etc/profile.d/conda.sh && \
 #    conda activate donkey && \
