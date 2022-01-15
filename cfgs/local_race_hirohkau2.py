@@ -20,7 +20,7 @@ IMAGE_DEPTH = 3         # default RGB=3, make 1 for mono
 DRIVE_LOOP_HZ = 40
 
 #JOYSTICK
-USE_JOYSTICK_AS_DEFAULT = True
+USE_JOYSTICK_AS_DEFAULT = False
 CONTROLLER_TYPE ='F710'
 JOYSTICK_MAX_THROTTLE = 1.0
 JOYSTICK_STEERING_SCALE = 1.0
@@ -31,7 +31,7 @@ DONKEY_GYM = True
 #DONKEY_SIM_PATH = "./DonkeySimLinux/donkey_sim.x86_64"
 #SIM_HOST = "localhost"
 DONKEY_SIM_PATH = "remote"
-SIM_HOST = "192.168.1.19"
+SIM_HOST = "163.143.94.185"
 
 
 DONKEY_GYM_ENV_NAME = "donkey-mountain-track-v0"
@@ -57,7 +57,7 @@ SIM_ARTIFICIAL_LATENCY = 0
 
 #WEB CONTROL
 WEB_CONTROL_PORT = 8887 
-WEB_INIT_MODE = "user"   # or user
+WEB_INIT_MODE = "local"   # or user
 
 #TRAINING
 DEFAULT_AI_FRAMEWORK = 'tensorflow'
