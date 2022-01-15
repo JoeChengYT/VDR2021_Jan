@@ -1,4 +1,4 @@
-# """ 
+# """
 # My CAR CONFIG 
 
 # This file is read by your car application's manage.py script to change the car
@@ -17,10 +17,10 @@ IMAGE_H = 120
 IMAGE_DEPTH = 3         # default RGB=3, make 1 for mono
 
 #VEHICLE
-DRIVE_LOOP_HZ = 10
+DRIVE_LOOP_HZ = 5
 
 #JOYSTICK
-USE_JOYSTICK_AS_DEFAULT = True
+USE_JOYSTICK_AS_DEFAULT = False
 CONTROLLER_TYPE ='F710'
 JOYSTICK_MAX_THROTTLE = 1.0
 JOYSTICK_STEERING_SCALE = 1.0
@@ -29,18 +29,18 @@ MODEL_CATEGORICAL_MAX_THROTTLE_RANGE = JOYSTICK_MAX_THROTTLE
 #DonkeyGym
 DONKEY_GYM = True
 DONKEY_SIM_PATH = "remote"
-SIM_HOST = "192.168.11.2"
+SIM_HOST = "donkey-sim.roboticist.dev"
 
 DONKEY_GYM_ENV_NAME = "donkey-mountain-track-v0"
 GYM_CONF = { "body_style" : "bare", "body_rgb" : (255, 255, 0), "car_name" : "sugasin2813", "font_size" : 25} # body style(donkey|bare|car01) body rgb 0-255
 GYM_CONF["racer_name"] = "sugasin2813"
 GYM_CONF["country"] = "JP"
 GYM_CONF["bio"] = "HELLO"
-SIM_ARTIFICIAL_LATENCY = 0
+SIM_ARTIFICIAL_LATENCY = 140
 
 #WEB CONTROL
 WEB_CONTROL_PORT = 8887 
-WEB_INIT_MODE = "user"   # or user
+WEB_INIT_MODE = "local"   # or user
 
 #TRAINING
 DEFAULT_AI_FRAMEWORK = 'tensorflow'
