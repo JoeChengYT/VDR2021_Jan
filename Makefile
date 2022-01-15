@@ -53,6 +53,8 @@ linear_fast1_run:
 	$(PYTHON) manage.py drive --model=save_model/linear_fast1.h5 --type=linear --myconfig=cfgs/kuro_myconfig_10Hz.py
 remote_run:
 	$(PYTHON) manage.py drive --model=save_model/linear_fast1.h5 --type=linear --myconfig=cfgs/remote_10Hz.py
+race_run:
+	$(PYTHON) manage.py drive --model=save_model/linear_fast1.h5 --type=linear --myconfig=cfgs/race_10Hz_linear.py
 test_train: models/test.h5
 	make models/test.h5
 linear_fast1_train: models/linear_fast1.h5

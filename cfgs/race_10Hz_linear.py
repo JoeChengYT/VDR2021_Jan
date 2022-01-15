@@ -32,11 +32,18 @@ DONKEY_SIM_PATH = "remote"
 SIM_HOST = "donkey-sim.roboticist.dev"
 
 DONKEY_GYM_ENV_NAME = "donkey-mountain-track-v0"
-GYM_CONF = { "body_style" : "donkey", "body_rgb" : (230, 0, 50), "car_name" : "Ahoy!", "font_size" : 18} # body style(donkey|bare|car01) body rgb 0-255
+#GYM_CONF = { "body_style" : "donkey", "body_rgb" : (230, 0, 50), "car_name" : "Ahoy!", "font_size" : 18} # body style(donkey|bare|car01) body rgb 0-255
+GYM_CONF = { "body_style" : "car01", "body_rgb" : (117, 0, 176), "car_name" : "kuro", "font_size" : 18} # body style(donkey|bare|car01) body rgb 0-255
 
-GYM_CONF["racer_name"] = "hirohaku"
+GYM_CONF["racer_name"] = "kuro"
 GYM_CONF["country"] = "JP"
 GYM_CONF["bio"] = "HELLO"
+GYM_CONF['cam_config'] = {
+    "img_enc" : "PNG",
+    "offset_x" : "0.0",
+    "offset_y" : "2.5", # 4.0 #pln 3.0
+    "offset_z" : "0.0", # 5.0 #pln 3.0
+    "rot_x" : "45.0"    # 90.0 #pln 50.0
 
 SIM_ARTIFICIAL_LATENCY = 0
 
