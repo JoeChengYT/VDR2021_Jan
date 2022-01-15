@@ -44,7 +44,7 @@ GYM_CONF['cam_config'] = {
     "offset_y" : "2.5", # 4.0 #pln 3.0
     "offset_z" : "0.0", # 5.0 #pln 3.0
     "rot_x" : "45.0"    # 90.0 #pln 50.0
-
+    }
 SIM_ARTIFICIAL_LATENCY = 0
 
 #WEB CONTROL
