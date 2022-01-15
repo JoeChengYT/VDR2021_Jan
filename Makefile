@@ -9,8 +9,8 @@ SPACE=$(EMPTY) $(EMPTY)
 REMOVE = rm -rf
 
 # Trim_Mask
-TRIM_MASK = data/Example_data.trim_mask_done
-TRIM_MASK_ALL = $(TRIM_MASK)
+TRIM_FAST_LAP_MASK = data/fast0_0.trim_mask_done data/fast0_1.trim_mask_done data/fast0_2.trim_mask_done data/fast0_3.trim_mask_done data/fast0_4.trim_mask_done data/first_lap0.trim_mask_done
+TRIM_MASK_FAST0_LAP_1ST = $(TRIM_FAST_LAP_MASK)
 
 #Trim
 TRM_EXAMPLE = data/Example_data.trim_done
@@ -65,7 +65,7 @@ trim_Anormal: $(ALTER_NORMAL)
 trim_Amser:$(ALTER_MSER)
 
 mask: $(MSK_ALL)
-trim_mask: $(TRIM_MASK_ALL)
+trim_mask: $(TRIM_MASK_FAST0_LAP_1ST)
 
 test_train: models/test.h5
 	make models/test.h5
@@ -75,9 +75,9 @@ test_train: models/test.h5
 #models/test.h5: $(SAVE_DATA)$(DATA)
 #	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/myconfig_10Hz.py
 
-models/test.h5: $(DATA)
-	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
-
+#models/test.h5: $(DATA)
+#	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
+####
 models/fast0_linear.h5: $(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
@@ -87,23 +87,36 @@ models/fast0_rnn2.h5: $(DATA)
 models/fast0_rnn4.h5: $(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku4_cfg.py
 
+####
 models/alter_normal_linear.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
 models/alter_normal_rnn2.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
 
+####
 models/alter_mser_linear.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
 models/alter_mser_rnn2.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
 
+#### Need 
 models/alter_normal_mser_linear.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
 models/alter_normal_mser_rnn2.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
+
+#### 
+models/alter_normalmask_linear.h5:$(DATA)
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
+
+models/alter_normalmask_rnn2.h5:$(DATA)
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
+
+models/alter_normalmask_rnn4.h5:$(DATA)
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku4_cfg.py
 
 # Autonomous Driving using .h5 File
 test_run:
@@ -145,6 +158,15 @@ alter_normal_mser_linear:
 
 alter_normal_mser_rnn2:
 	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+alter_normalmask_linear:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+alter_normalmask_rnn2:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+alter_normalmask_rnn4:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku4.py
 
 ###############################################################################
 # Input files to Docker Team_ahoy_racer directory####################################################################
