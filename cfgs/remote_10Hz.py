@@ -29,7 +29,7 @@ MODEL_CATEGORICAL_MAX_THROTTLE_RANGE = JOYSTICK_MAX_THROTTLE
 #DonkeyGym
 DONKEY_GYM = True
 DONKEY_SIM_PATH = "remote"
-SIM_HOST = "163.143.94.152"
+SIM_HOST = "donkey-sim.roboticist.dev"
 
 DONKEY_GYM_ENV_NAME = "donkey-mountain-track-v0"
 GYM_CONF = { "body_style" : "donkey", "body_rgb" : (230, 0, 50), "car_name" : "Huang", "font_size" : 18} # body style(donkey|bare|car01) body rgb 0-255
