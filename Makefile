@@ -60,7 +60,7 @@ linear_fast1_train: models/linear_fast1.h5
 models/test.h5: $(DATASET)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/myconfig_10Hz.py
 models/linear_fast1.h5: $(DATASET)
-	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/kuro_myconfig_10Hz.py
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=save_data/fastdata1,save_data/fastdata2 --model=$@ --type=linear --config=cfgs/kuro_myconfig_10Hz.py
 
 
 ###############################################################################
