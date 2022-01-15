@@ -13,7 +13,6 @@ TRIM_FAST_LAP_MASK = data/fast0_0.trim_mask_done data/fast0_1.trim_mask_done dat
 TRIM_MASK_FAST0_LAP_1ST = $(TRIM_FAST_LAP_MASK)
 
 #Trim
-TRM_EXAMPLE = data/Example_data.trim_done
 FAST0 = data/fast0_0.trim_done data/fast0_1.trim_done data/fast0_2.trim_done data/fast0_3.trim_done data/fast0_4.trim_done
 LAP1ST = data/first_lap0.trim_done
 MSER_FAST_LAP = data/mserfast0_0.trim_done data/mserfast0_1.trim_done data/mserfast0_2.trim_done data/mserfast0_3.trim_done data/mserfast0_4.trim_done data/mserfirst_lap0.trim_done
@@ -22,8 +21,6 @@ TRM_FAST0 = $(FAST0)
 TRM_LAP1ST = $(LAP1ST)
 ALTER_NORMAL = $(FAST0) $(LAP1ST)
 ALTER_MSER = $(MSER_FAST_LAP)
-
-TRM_ALL = $(TRM_EXAMPLE)
 
 #Mask
 MSK_EXAMPLE = data/Example_data.mask_done
@@ -60,24 +57,13 @@ record40:
 trim: $(TRM_FAST0) $(TRM_LAP1ST)
 trm_fast0: $(TRM_FAST0)
 trim_lap1st: $(TRM_LAP1ST)
-
 trim_Anormal: $(ALTER_NORMAL)
 trim_Amser:$(ALTER_MSER)
-
-mask: $(MSK_ALL)
 trim_mask: $(TRIM_MASK_FAST0_LAP_1ST)
 
-test_train: models/test.h5
-	make models/test.h5
-
 # Create Model
-# DATAには整形(trim, mask)したデータを入れる。整形しないデータを使う場合はSAVE_DATAから呼び出す。
-#models/test.h5: $(SAVE_DATA)$(DATA)
-#	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/myconfig_10Hz.py
 
-#models/test.h5: $(DATA)
-#	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
-####
+#### make trm_fast0
 models/fast0_linear.h5: $(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
@@ -87,28 +73,28 @@ models/fast0_rnn2.h5: $(DATA)
 models/fast0_rnn4.h5: $(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku4_cfg.py
 
-####
+#### make trim_Anormal
 models/alter_normal_linear.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
 models/alter_normal_rnn2.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
 
-####
+#### make trim_Amser
 models/alter_mser_linear.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
 models/alter_mser_rnn2.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
 
-#### Need 
+#### make trim_Amser; make trim_Anormal
 models/alter_normal_mser_linear.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
 models/alter_normal_mser_rnn2.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
 
-#### 
+#### make trim_mask; make trim_Anormal 
 models/alter_normalmask_linear.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
@@ -119,18 +105,6 @@ models/alter_normalmask_rnn4.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku4_cfg.py
 
 # Autonomous Driving using .h5 File
-test_run:
-	$(PYTHON) manage.py drive --model=models/test.h5 --type=linear --myconfig=cfgs/hirohaku_cfg.py
-
-linear:
-	$(PYTHON) manage.py drive --model=save_model/fast0_linear.h5 --type=linear --myconfig=cfgs/hirohaku2_cfg.py
-
-rnn2:
-	$(PYTHON) manage.py drive --model=save_model/fast0_rnn2.h5 --type=rnn --myconfig=cfgs/hirohaku2_cfg.py
-
-rnn4:
-	$(PYTHON) manage.py drive --model=save_model/fast0_rnn4.h5 --type=rnn --myconfig=cfgs/hirohaku4_cfg.py
-
 # Race Command
 fast0_linear:
 	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
@@ -158,6 +132,15 @@ alter_normal_mser_linear:
 
 alter_normal_mser_rnn2:
 	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+alter_normalmask_linear:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+alter_normalmask_rnn2:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+alter_normalmask_rnn4:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku4.py
 
 alter_normalmask_linear:
 	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
