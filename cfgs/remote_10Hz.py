@@ -20,7 +20,7 @@ IMAGE_DEPTH = 3         # default RGB=3, make 1 for mono
 DRIVE_LOOP_HZ = 10
 
 #JOYSTICK
-USE_JOYSTICK_AS_DEFAULT = True
+USE_JOYSTICK_AS_DEFAULT = False
 CONTROLLER_TYPE ='F710'
 JOYSTICK_MAX_THROTTLE = 1.0
 JOYSTICK_STEERING_SCALE = 1.0
@@ -29,7 +29,7 @@ MODEL_CATEGORICAL_MAX_THROTTLE_RANGE = JOYSTICK_MAX_THROTTLE
 #DonkeyGym
 DONKEY_GYM = True
 DONKEY_SIM_PATH = "remote"
-SIM_HOST = "163.143.94.185"
+SIM_HOST = "163.143.94.152"
 
 DONKEY_GYM_ENV_NAME = "donkey-mountain-track-v0"
 GYM_CONF = { "body_style" : "donkey", "body_rgb" : (230, 0, 50), "car_name" : "Huang", "font_size" : 18} # body style(donkey|bare|car01) body rgb 0-255
