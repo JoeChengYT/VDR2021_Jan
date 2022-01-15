@@ -118,6 +118,34 @@ rnn2:
 rnn4:
 	$(PYTHON) manage.py drive --model=save_model/fast0_rnn4.h5 --type=rnn --myconfig=cfgs/hirohaku4_cfg.py
 
+# Race Command
+fast0_linear:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+fast0_rnn2:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+fast0_rnn4:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+alter_normal_linear:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+alter_normal_rnn2:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+alter_mser_linear:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+alter_mser_rnn2:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+alter_normal_mser_linear:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+alter_normal_mser_rnn2:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+
 ###############################################################################
 # Input files to Docker Team_ahoy_racer directory####################################################################
 docker:
