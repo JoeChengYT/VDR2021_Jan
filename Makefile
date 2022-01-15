@@ -113,7 +113,7 @@ fast0_rnn2:
 	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
 
 fast0_rnn4:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku4.py
 
 alter_normal_linear:
 	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
