@@ -80,7 +80,7 @@ test_run_for_vdr:
 	$(PYTHON) manage.py drive --model=save_model/vdr_model.h5 --type=linear --myconfig=cfgs/remote_sgy_10Hz.py
 
 sgy_model_test_run:
-	$(PYTHON) manage.py drive --model=save_model/sgy_model.h5 --type=linear --myconfig=cfgs/myconfig_10Hz_sugaya.py
+	$(PYTHON) manage.py drive --model=models/sgy_model.h5 --type=linear --myconfig=cfgs/myconfig_10Hz_sugaya.py
 
 test_train: models/test.h5
 	make models/test.h5
