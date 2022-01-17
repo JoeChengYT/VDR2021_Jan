@@ -10,3 +10,4 @@ unitylog.txt
 __pycache__
 database.json
 Docker/Team_ahoy_racer/*
+*.sh

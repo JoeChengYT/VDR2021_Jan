@@ -142,6 +142,15 @@ alter_normalmask_rnn2:
 alter_normalmask_rnn4:
 	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku4.py
 
+alter_fast0_linear:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+alter_fast0_rnn2:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+fast_lap:
+	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+
 ###############################################################################
 # Input files to Docker Team_ahoy_racer directory####################################################################
 docker:
