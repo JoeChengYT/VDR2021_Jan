@@ -17,14 +17,6 @@ RUN apt-get install -y python3-igraph
 RUN python3 -m pip install scipy rospkg configparser zmq igraph trajectory_planning_helpers scikit-build cmake catkin_pkg rosdep rosinstall_generator rosinstall wstool vcstools catkin_tools
 RUN apt remove -y python3-numpy
 RUN pip install pyfiglet prettytable
-#RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.9.2-Linux-x86_64.sh -O ~/miniconda.sh && \
-#    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
-#    /opt/conda/bin/conda clean --all && \
-#    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-#    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-#    echo "conda activate base" >> ~/.bashrc
-
-#ENV PATH /opt/conda/bin:$PATH
 
 WORKDIR /root/projects/.
 RUN git clone https://github.com/autorope/donkeycar && \
@@ -32,25 +24,13 @@ RUN git clone https://github.com/autorope/donkeycar && \
     cd donkeycar && \
     git checkout dev
 
-#WORKDIR /root/projects/donkeycar/install/envs
-#RUN conda env create -f ubuntu.yml
-
 WORKDIR /root/projects/donkeycar
 RUN pip install -e .[pc] && \
     pip install tensorflow==2.4.0 tensorflow-gpu==2.4.0
 
-#RUN . /opt/conda/etc/profile.d/conda.sh && \
-#    conda activate donkey && \
-#    pip install -e .[pc] && \
-#    pip install tensorflow==2.4.0 tensorflow-gpu==2.4.0
-
 WORKDIR /root/projects/gym-donkeycar
 RUN pip install -e .[gym-donkeycar]
-#RUN . /opt/conda/etc/profile.d/conda.sh && \
-#    conda activate donkey && \
-#    pip install -e .[gym-donkeycar]
 
 COPY ./Team_ahoy_racer  /root/Team_ahoy_racer
 RUN apt -y install python3-opencv
-#RUN echo "conda activate donkey" >> ~/.bashrc
 WORKDIR /root/Team_ahoy_racer
