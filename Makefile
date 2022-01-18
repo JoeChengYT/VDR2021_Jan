@@ -26,9 +26,9 @@ ALTER_MSER = $(MSER_FAST_LAP)
 MSK_EXAMPLE = data/Example_data.mask_done
 MSK_ALL = $(MSK_EXAMPLE)
 
-#Call Data
-SAVE_DATA = $(shell find save_data/ -type d | grep -v "images" | sed -e '1d' | tr '\n' ' ')
-DATA = $(shell find data/ -type d | grep -v "images" | sed -e '1d' | tr '\n' ' ')
+#Call Data (hirohaku)
+HIROHAKU_SAVE_DATA = $(shell find save_data/hirohaku -type d | grep -v "images" | sed -e '1d' | tr '\n' ' ')
+#DATA = $(shell find data/ -type d | grep -v "images" | sed -e '1d' | tr '\n' ' ')
 
 ##################################################################################################################
 
@@ -64,92 +64,118 @@ trim_mask: $(TRIM_MASK_FAST0_LAP_1ST)
 # Create Model
 
 #### make trm_fast0
-models/fast0_linear.h5: $(DATA)
+models/fast0_linear.h5: $(HIROHAKU_SAVE_DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
-models/fast0_rnn2.h5: $(DATA)
+models/fast0_rnn2.h5: $(HIROHAKU_SAVE_DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
 
-models/fast0_rnn4.h5: $(DATA)
+models/fast0_rnn4.h5: $(HIROHAKU_SAVE_DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku4_cfg.py
 
 #### make trim_Anormal
-models/alter_normal_linear.h5:$(DATA)
+models/alter_normal_linear.h5:$(HIROHAKU_SAVE_DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
-models/alter_normal_rnn2.h5:$(DATA)
+models/alter_normal_rnn2.h5:$(HIROHAKU_SAVE_DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
 
 #### make trim_Amser
-models/alter_mser_linear.h5:$(DATA)
+models/alter_mser_linear.h5:$(HIROHAKU_SAVE_DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
-models/alter_mser_rnn2.h5:$(DATA)
+models/alter_mser_rnn2.h5:$(HIROHAKU_SAVE_DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
 
 #### make trim_Amser; make trim_Anormal
-models/alter_normal_mser_linear.h5:$(DATA)
+models/alter_normal_mser_linear.h5:$(HIROHAKU_SAVE_DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
-models/alter_normal_mser_rnn2.h5:$(DATA)
+models/alter_normal_mser_rnn2.h5:$(HIROHAKU_SAVE_DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
 
 #### make trim_mask; make trim_Anormal 
-models/alter_normalmask_linear.h5:$(DATA)
+models/alter_normalmask_linear.h5:$(HIROHAKU_SAVE_DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/hirohaku2_cfg.py
 
-models/alter_normalmask_rnn2.h5:$(DATA)
+models/alter_normalmask_rnn2.h5:$(HIROHAKU_SAVE_DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku2_cfg.py
 
-models/alter_normalmask_rnn4.h5:$(DATA)
+models/alter_normalmask_rnn4.h5:$(HIROHAKU_SAVE_DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku4_cfg.py
+
+---------------------------------------------------------
+# Kusaryodx
+
+linear_fast1_train: models/linear_fast1.h5
+
+models/linear_fast1.h5:
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=save_data/kusaryodx/fastdata1,save_data/kusaryodx/fastdata2 --model=$@ --type=linear --config=cfgs/kuro_myconfig_10Hz.py
+
 
 # Autonomous Driving using .h5 File
 # Race Command
+
+# Hirohaku
 fast0_linear:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
 
 fast0_rnn2:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
 
 fast0_rnn4:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku4.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku4.py
 
 alter_normal_linear:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
 
 alter_normal_rnn2:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
 
 alter_mser_linear:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
 
 alter_mser_rnn2:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
 
 alter_normal_mser_linear:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
 
 alter_normal_mser_rnn2:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
 
 alter_normalmask_linear:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
 
 alter_normalmask_rnn2:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
 
 alter_normalmask_rnn4:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku4.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku4.py
 
 alter_fast0_linear:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
 
 alter_fast0_rnn2:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=rnn --myconfig=cfgs/race_40Hz_hirohaku2.py
 
 fast_lap:
-	$(PYTHON) manage.py drive --model=save_model/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+	$(PYTHON) manage.py drive --model=save_model/hirohaku/$@.h5 --type=linear --myconfig=cfgs/race_40Hz_hirohaku2.py
+
+---------------------------------------------------------
+# Huang
+
+huang:
+	$(PYTHON) manage.py drive --model=save_model/huang/huang_stable.h5 --type=linear --myconfig=cfgs/huang_myconfig_10Hz.py
+
+---------------------------------------------------------
+# Kusaryodx
+
+kusaryodx:
+	$(PYTHON) manage.py drive --model=save_model/kusaryodx/linear_fast1.h5 --type=linear --myconfig=cfgs/kuro_myconfig_10Hz.py
+
+---------------------------------------------------------
+# Sugasin2813
 
 ###############################################################################
 # Input files to Docker Team_ahoy_racer directory####################################################################
