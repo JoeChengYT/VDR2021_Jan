@@ -14,6 +14,7 @@ TRM_ALL = $(TRM_EXAMPLE)
 #Mask
 MSK_EXAMPLE = data/Example_data.trimmed.masked1
 MSK_ALL = $(MSK_EXAMPLE)
+MSK_DATA1 = data/data1.masked2
 
 
 #Call Data
@@ -36,7 +37,8 @@ install_sim:
 	chmod +x DonkeySimLinux/donkey_sim.x86_64
 
 record: record10
-
+record_kuro:
+	$(PYTHON) manage.py drive --js --myconfig=cfgs/kuro_myconfig_10Hz.py
 record10:
 	$(PYTHON) manage.py drive --js --myconfig=cfgs/myconfig_10Hz.py
 
@@ -47,12 +49,36 @@ mask: $(MSK_ALL)
 
 test_run:
 	$(PYTHON) manage.py drive --model=models/test.h5 --type=linear --myconfig=cfgs/myconfig_10Hz.py
-
+linear_fast1_run:
+	$(PYTHON) manage.py drive --model=save_model/linear_fast1.h5 --type=linear --myconfig=cfgs/kuro_myconfig_10Hz.py
+remote_run:
+	$(PYTHON) manage.py drive --model=save_model/linear_fast1.h5 --type=linear --myconfig=cfgs/remote_10Hz.py
+race_run:
+	$(PYTHON) manage.py drive --model=save_model/linear_fast1.h5 --type=linear --myconfig=cfgs/race_10Hz_linear.py
 test_train: models/test.h5
 	make models/test.h5
+linear_fast1_train: models/linear_fast1.h5
 
 models/test.h5: $(DATASET)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=linear --config=cfgs/myconfig_10Hz.py
+models/linear_fast1.h5: $(DATASET)
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=save_data/fastdata1,save_data/fastdata2 --model=$@ --type=linear --config=cfgs/kuro_myconfig_10Hz.py
+
+
+###############################################################################
+# Input files to Docker Team_ahoy_racer directory####################################################################
+docker:
+	@echo Create contents which include in docker image
+	mkdir -p Docker/Team_ahoy_racer && \
+	cp -r cfgs/ Docker/Team_ahoy_racer/cfgs/ && \
+	cp -r save_model/ Docker/Team_ahoy_racer/save_model/ && \
+	cp config.py Docker/Team_ahoy_racer/config.py && \
+	cp manage.py Docker/Team_ahoy_racer/manage.py && \
+	cp Makefile Docker/Team_ahoy_racer/Makefile && \
+	mkdir -p Docker/Team_ahoy_racer/models && \
+	mkdir -p Docker/Team_ahoy_racer/data
+
+######################################################################################################################
 
 .PHONY: .trimmed
 data/%.trimmed: save_data/%.trim
