@@ -50,7 +50,7 @@ RUN pip install -e .[gym-donkeycar]
 #    conda activate donkey && \
 #    pip install -e .[gym-donkeycar]
 
-COPY ./Team_ahoy_racer  /root/Team_ahoy_racer
 RUN apt -y install python3-opencv
+COPY ./Team_ahoy_racer  /root/Team_ahoy_racer
 #RUN echo "conda activate donkey" >> ~/.bashrc
 WORKDIR /root/Team_ahoy_racer

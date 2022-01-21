@@ -40,7 +40,7 @@ SIM_ARTIFICIAL_LATENCY = 140
 
 #WEB CONTROL
 WEB_CONTROL_PORT = 8887 
-WEB_INIT_MODE = "local"   # or user
+WEB_INIT_MODE = "user"   # or user
 
 #TRAINING
 DEFAULT_AI_FRAMEWORK = 'tensorflow'

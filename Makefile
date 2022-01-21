@@ -18,7 +18,9 @@ MSK_ALL = $(MSK_EXAMPLE)
 
 #Call Data
 DATASET = $(shell find data/ -type d | grep -v "images" | sed -e '1d' | tr '\n' ' ')
-SGY_DATA = $(shell find save_data/ -type d | grep -v "images" | sed -e '1d' | tr '\n' ' ')
+SGY_WHITE_LINE_DATA = $(shell find save_data/sgy_white_line*-type d | grep -v "images" | sed -e '1d' | tr '\n' ' ')
+
+SGY_YELLOW_LINE_DATA = $(shell find save_data/sgy_yellow_line*-type d | grep -v "images" | sed -e '1d' | tr '\n' ' ')
 
 none:
 	@echo "Argument is required."
@@ -50,33 +52,21 @@ dataset: $(TRM_ALL)
 mask: $(MSK_ALL)
 
 test_run:
-	$(PYTHON) manage.py drive --model=save_model/test.h5 --type=linear --myconfig=cfgs/myconfig_10Hz.py
+	$(PYTHON) manage.py drive --model=save_model/sgy_model5.h5 --type=linear --myconfig=cfgs/myconfig_10Hz.py
 
-sgy_run:
-	$(PYTHON) manage.py drive --model=save_model/sgy_model.h5 --type=linear --myconfig=cfgs/myconfig_10Hz_sugaya.py
+run_on_the_yellow_run1:
+	$(PYTHON) manage.py drive --model=save_model/run_on_the_yellow.h5 --type=linear --myconfig=cfgs/myconfig_10Hz_sugaya.py
 
-sgy_run2:
-	$(PYTHON) manage.py drive --model=save_model/sgy_model2.h5 --type=linear --myconfig=cfgs/myconfig_10Hz_sugaya.py
-
-sgy_run3:
-	$(PYTHON) manage.py drive --model=save_model/sgy_model3.h5 --type=linear --myconfig=cfgs/myconfig_10Hz_sugaya.py
+run_on_the_yellow_run2:
+	$(PYTHON) manage.py drive --model=save_model/run_on_the_yellow2.h5 --type=linear --myconfig=cfgs/myconfig_10Hz_sugaya.py
 
 remote_run_sgy1:
-	$(PYTHON) manage.py drive --model=save_model/sgy_model.h5 --type=linear --myconfig=cfgs/remote_sgy_10Hz.py
+	$(PYTHON) manage.py drive --model=save_model/run_on_the_yellow.h5 --type=linear --myconfig=cfgs/remote_sgy_10Hz.py
 
 remote_run_sgy2:
-	$(PYTHON) manage.py drive --model=save_model/sgy_model2.h5 --type=linear --myconfig=cfgs/remote_sgy_10Hz.py
+	$(PYTHON) manage.py drive --model=save_model/run_on_the_yellow2.h5 --type=linear --myconfig=cfgs/remote_sgy_10Hz.py
 
-remote_run_sgy3:
-	$(PYTHON) manage.py drive --model=save_model/sgy_model3.h5 --type=linear --myconfig=cfgs/remote_sgy_10Hz.py
-
-remote_run_sgy4:
-	$(PYTHON) manage.py drive --model=save_model/sgy_model4.h5 --type=linear --myconfig=cfgs/remote_sgy_10Hz.py
-
-remote_run_sgy5:
-	$(PYTHON) manage.py drive --model=save_model/sgy_model5.h5 --type=linear --myconfig=cfgs/remote_sgy_10Hz.py
-
-test_run_for_vdr:
+run_for_vdr:
 	$(PYTHON) manage.py drive --model=save_model/vdr_model.h5 --type=linear --myconfig=cfgs/remote_sgy_10Hz.py
 
 sgy_model_test_run:
