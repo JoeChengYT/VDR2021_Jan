@@ -1,4 +1,4 @@
-""" 
+# """ 
 # My CAR CONFIG 
 
 # This file is read by your car application's manage.py script to change the car
@@ -20,7 +20,7 @@ IMAGE_DEPTH = 3         # default RGB=3, make 1 for mono
 DRIVE_LOOP_HZ = 10
 
 #JOYSTICK
-USE_JOYSTICK_AS_DEFAULT = False
+USE_JOYSTICK_AS_DEFAULT = True
 CONTROLLER_TYPE ='F710'
 JOYSTICK_MAX_THROTTLE = 1.0
 JOYSTICK_STEERING_SCALE = 1.0
@@ -28,20 +28,23 @@ MODEL_CATEGORICAL_MAX_THROTTLE_RANGE = JOYSTICK_MAX_THROTTLE
 
 #DonkeyGym
 DONKEY_GYM = True
-DONKEY_SIM_PATH = "remote"
-SIM_HOST = "donkey-sim.roboticist.dev"
+DONKEY_SIM_PATH = "./DonkeySimLinux/donkey_sim.x86_64"
+SIM_HOST = "localhost"
 
-DONKEY_GYM_ENV_NAME = "donkey-mountain-track-v0"
-GYM_CONF["racer_name"] = "hirohaku"
+DONKEY_GYM_ENV_NAME = "donkey-mountain-track-v0" 
+#GYM_CONF = { "body_style" : "bare", "body_rgb" : (69, 69, 69), "car_name" : "hirohkau_Ahoy!", "font_size" : 18} # body style(donkey|bare|car01) body rgb 0-255
+GYM_CONF = { "body_style" : "donkey", "body_rgb" : (255, 0, 255), "car_name" : "sugasin2813", "font_size" : 30} # body style(donkey|bare|car01) body rgb 0-255
+
+
+GYM_CONF["racer_name"] = "sugasin2813"
 GYM_CONF["country"] = "JP"
 GYM_CONF["bio"] = "HELLO"
 
 SIM_ARTIFICIAL_LATENCY = 0
 
 #WEB CONTROL
-WEB_CONTROL_PORT = 8887 
-GYM_CONF = { "body_style" : "donkey", "body_rgb" : (230, 0, 50), "car_name" : "Ahoy!", "font_size" : 18} # body style(donkey|bare|car01) body rgb 0-255
-
+WEB_CONTROL_PORT = 8887
+WEB_INIT_MODE = "local"   # or user
 
 #TRAINING
 DEFAULT_AI_FRAMEWORK = 'tensorflow'
@@ -58,7 +61,6 @@ OPTIMIZER = None           #adam, sgd, rmsprop, etc.. None accepts default
 LEARNING_RATE = 0.001      #only used when OPTIMIZER specified
 LEARNING_RATE_DECAY = 0.0  #only used when OPTIMIZER specified
 CACHE_IMAGES = False       #keep images in memory. will speed succesive epochs, but crater if not enough mem.
-SEQUENCE_LENGTH = 2
 
 #RECORD OPTIONS
 RECORD_DURING_AI = False
