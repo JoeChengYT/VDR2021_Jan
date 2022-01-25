@@ -18,7 +18,7 @@ The files that need to be copied are as follows.
 - `manage.py`  
 - `Makefile`: Use the *make* command to start automatic driving  
 
-## Step 2. Start image build.
+##Step 2. Start image build.
 ``` sh . /img_build.sh ```  
 to start Docker's Image build.  
 It will take 1.5 hours to build.
@@ -71,7 +71,7 @@ Team_ahoy_racerディレクトリはDockerImage作成時に必要なディレク
 - `manage.py`
 - `Makefile`: makeコマンドを使って自動運転を開始します
 
-## Step 2. イメージビルドを開始する
+##Step 2. イメージビルドを開始する
 ``` sh ./img_build.sh ```  
 を実行することで、DockerのImageビルドが始まります。  
 ビルドには1.5時間掛かります。
