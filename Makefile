@@ -104,6 +104,10 @@ models/alter_normalmask_rnn2.h5:$(DATA)
 models/alter_normalmask_rnn4.h5:$(DATA)
 	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku4_cfg.py
 
+models/alter_normalmask_rnn3.h5:$(DATA)
+	TF_FORCE_GPU_ALLOW_GROWTH=true donkey train --tub=$(subst $(SPACE),$(COMMA),$^) --model=$@ --type=rnn --config=cfgs/hirohaku3_cfg.py
+
+
 # Autonomous Driving using .h5 File
 # Race Command
 fast0_linear:
