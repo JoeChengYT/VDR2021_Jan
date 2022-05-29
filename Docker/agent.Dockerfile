@@ -4,7 +4,9 @@ ENV LD_LIBRARY_PATH=/usr/local/cuda-11.0/lib64
 ENV TZ=Asia/Tokyo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN apt-get -y update
+RUN apt-key del 3bf863cc && \
+    apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/3bf863cc.pub && \
+    apt-get -y update
 RUN apt-get -y upgrade
 
 RUN apt-get install -y vim wget bzip2 ca-certificates curl git
@@ -22,7 +24,7 @@ WORKDIR /root/projects/.
 RUN git clone https://github.com/autorope/donkeycar && \
     git clone https://github.com/tawnkramer/gym-donkeycar && \
     cd donkeycar && \
-    git checkout dev
+    git checkout master
 
 WORKDIR /root/projects/donkeycar
 RUN pip install -e .[pc] && \
